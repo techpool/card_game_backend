@@ -45,6 +45,7 @@ router.post('/', function (req, res, next) {
 
 router.get('/', function (req, res, next) {
     console.log(req.body);
+    console.log('---------------')
     console.log(req.user);
 
     Cards.findOne({
@@ -54,8 +55,9 @@ router.get('/', function (req, res, next) {
     		res.status(500).json(cardFetchError);
     		return;
     	} else if(!fetchedCard){
-
-    		res.status(404);
+    		res.status(404).json({
+                info: 'No cards found'
+            });
     	} else {
 
     		res.status(200).json(fetchedCard);
